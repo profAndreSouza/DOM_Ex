@@ -32,8 +32,11 @@ squadForm.addEventListener("submit", function(event) {
     const btDelete = document.createElement("button")
     btDelete.textContent = "Remover";
     btDelete.addEventListener("click", function () {
-        alert(this.rowIndex);
-    })
+        if (confirm("Confirma a exclusão do cadastro desta SQUAD?")) {
+            document.getElementById("squadTable")
+                .deleteRow(this.closest("tr").rowIndex);
+        }
+    });
 
     tdAction.appendChild(btEdit);
     tdAction.appendChild(btDelete);
