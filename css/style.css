@@ -32,6 +32,7 @@ input[type="text"] {
 }
 
 button {
+    width: 150px;
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -63,4 +64,9 @@ th {
 tr:nth-child(even) {
     background-color: #c9c6c6;
     text-align: left;
+}
+
+.spacer {
+    display: flex;
+    gap: 10px;
 }

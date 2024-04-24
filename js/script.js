@@ -10,12 +10,12 @@ squadForm.addEventListener("submit", function(event) {
     const squadMembers = document.getElementById("squadMembers").value;
 
     if (squadButton.textContent == "Salvar Alterações") {
-        const row = document.getElementById("squadRow").value;
-
-        squadTable.rows[row].cells[0].textContent = squadName;
-        squadTable.rows[row].cells[1].textContent = squadLeader;
-        squadTable.rows[row].cells[2].textContent = squadMembers;
-
+        if (event.submitter.textContent != "Cancelar") {
+            const row = document.getElementById("squadRow").value;
+            squadTable.rows[row].cells[0].textContent = squadName;
+            squadTable.rows[row].cells[1].textContent = squadLeader;
+            squadTable.rows[row].cells[2].textContent = squadMembers;
+        }
         squadButton.textContent = "Cadastrar Squad";
         document.getElementById("squadCancel").remove();
 
@@ -39,6 +39,8 @@ squadForm.addEventListener("submit", function(event) {
     newRow.appendChild(tdMembers);
 
     const tdAction = document.createElement("td");
+
+    tdAction.className = "spacer";
 
     const btEdit = document.createElement("button")
     btEdit.textContent = "Editar";
