@@ -1,4 +1,6 @@
 const squadForm = document.getElementById("squadForm");
+const squadTable = document.getElementById("squadTable");
+const squadButton = document.getElementById("squadSave");
 
 squadForm.addEventListener("submit", function(event) {
     event.preventDefault();
@@ -6,6 +8,21 @@ squadForm.addEventListener("submit", function(event) {
     const squadName = document.getElementById("squadName").value;
     const squadLeader = document.getElementById("squadLeader").value;
     const squadMembers = document.getElementById("squadMembers").value;
+
+    if (squadButton.textContent == "Salvar Alterações") {
+        const row = document.getElementById("squadRow").value;
+
+        squadTable.rows[row].cells[0].textContent = squadName;
+        squadTable.rows[row].cells[1].textContent = squadLeader;
+        squadTable.rows[row].cells[2].textContent = squadMembers;
+
+        squadButton.textContent = "Cadastrar Squad";
+        document.getElementById("squadCancel").remove();
+
+        document.getElementById("squadRow").value = "";
+        squadForm.reset();
+        return;
+    }
 
     const newRow = document.createElement("tr");
 
@@ -26,15 +43,31 @@ squadForm.addEventListener("submit", function(event) {
     const btEdit = document.createElement("button")
     btEdit.textContent = "Editar";
     btEdit.addEventListener("click", function () {
-        alert("Editar");
+        const row = this.closest("tr").rowIndex;
+        const squadName = squadTable.rows[row].cells[0].textContent;
+        const squadLeader = squadTable.rows[row].cells[1].textContent;
+        const squadMembers = squadTable.rows[row].cells[2].textContent;
+
+        document.getElementById("squadName").value = squadName;
+        document.getElementById("squadLeader").value = squadLeader;
+        document.getElementById("squadMembers").value = squadMembers;
+
+        if (document.getElementById("squadRow").value == "") {
+            const btCancel = document.createElement("button")
+            btCancel.textContent = "Cancelar";
+            btCancel.id = "squadCancel";
+            squadForm.appendChild(btCancel);
+        }
+
+        document.getElementById("squadRow").value = row;
+        squadButton.textContent = "Salvar Alterações";
     })
     
     const btDelete = document.createElement("button")
     btDelete.textContent = "Remover";
     btDelete.addEventListener("click", function () {
         if (confirm("Confirma a exclusão do cadastro desta SQUAD?")) {
-            document.getElementById("squadTable")
-                .deleteRow(this.closest("tr").rowIndex);
+            squadTable.deleteRow(this.closest("tr").rowIndex);
         }
     });
 
@@ -43,5 +76,7 @@ squadForm.addEventListener("submit", function(event) {
 
     newRow.appendChild(tdAction);
 
-    document.getElementById("squadTable").appendChild(newRow);
+    squadTable.appendChild(newRow);
+
+    squadForm.reset();
 })

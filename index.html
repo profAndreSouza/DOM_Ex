@@ -12,15 +12,16 @@
         <h1>Cadastro de Squads</h1>
         <form action="#" id="squadForm">
             <label for="squadName">Nome da Squad:</label>
-            <input type="text" name="squadName" id="squadName" value="Squad 01" required>
+            <input type="text" name="squadName" id="squadName" required>
 
             <label for="squadLeader">Líder:</label>
-            <input type="text" name="squadLeader" id="squadLeader" value="Aluno A" required>
+            <input type="text" name="squadLeader" id="squadLeader">
             
             <label for="squadMembers">Membros:</label>
-            <input type="text" name="squadMembers" id="squadMembers" value="Aluno B, Aluno C e Aluno D" required>
-
-            <button type="submit">Cadastrar Squad</button>
+            <input type="text" name="squadMembers" id="squadMembers" >
+            
+            <input type="hidden" name="squadRow" id="squadRow">
+            <button id="squadSave" type="submit">Cadastrar Squad</button>
         </form>
 
         <h2>Squads cadastradas</h2>
